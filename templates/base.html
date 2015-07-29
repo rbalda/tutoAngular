@@ -13,46 +13,60 @@
     <script src="{% static 'js/app.js' %}"></script>
     <script src="{% static 'js/angular-messages.js' %}"></script>
     <script src="{% static 'js/angular-resource.js' %}"></script>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/custom.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/elements.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/animate.css' %}" rel="stylesheet"/>
+
+
 
 </head>
 <body>
-<div ng-controller="formController">
+<div ng-controller="formController" class="container">
+<div class="col-md-4">
     <p ng-show="error">Ocurrio Un error</p>
     <p ng-show="success">Guardado Exitosamente</p>
     <form name="formPersona" novalidate>
-        <label>Nombre</label>
-        <input type="text" name="nombre" ng-model="persona.nombres" ng-pattern="/^[a-zA-Z ]{5,50}$/" ng-required="true">
-        <div ng-messages="formPersona.nombre.$error">
-            <small ng-message="required" ng-if="!formPersona.nombre.$pristine">Este campo es obligatorio</small>
-            <small ng-message="pattern">Solo admite texto separado por espacios</small>
+        <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" name="nombre" ng-model="persona.nombres" ng-pattern="/^[a-zA-Z ]{5,50}$/" ng-required="true">
+            <div ng-messages="formPersona.nombre.$error">
+                <small ng-message="required" ng-if="!formPersona.nombre.$pristine">Este campo es obligatorio</small>
+                <small ng-message="pattern">Solo admite texto separado por espacios</small>
+            </div>
         </div>
-        <label>Apellido</label>
-        <input type="text" name="apellido" ng-model="persona.apellidos" ng-pattern="/^[a-zA-Z ]{10,50}$/" ng-required="true">
-        <div ng-messages="formPersona.apellido.$error">
-            <small ng-message="required" ng-if="!formPersona.nombre.$pristine">Este campo es obligatorio</small>
-            <small ng-message="pattern">Solo admite texto separado por espacios</small>
-        </div>
+        <div class="form-group">
+            <label>Apellido</label>
+            <input type="text" name="apellido" ng-model="persona.apellidos" ng-pattern="/^[a-zA-Z ]{10,50}$/" ng-required="true">
+            <div ng-messages="formPersona.apellido.$error">
+                <small ng-message="required" ng-if="!formPersona.nombre.$pristine">Este campo es obligatorio</small>
+                <small ng-message="pattern">Solo admite texto separado por espacios</small>
+            </div>
+            </div>
+        <div class="form-group">
         <label>Cedula</label>
-        <input type="text" name="cedula" ng-model="persona.cedula" ng-pattern="/[0-9]$/"
-               ng-maxlength="10"
-               ng-minlength="10"
-               ng-required="true">
-        <div ng-messages="formPersona.cedula.$error">
-            <small ng-message="required" ng-if="!formPersona.nombre.$pristine">Este campo es obligatorio</small>
-            <small ng-message="pattern">Solo admite numeros</small>
-            <small ng-message="maxlength">Tiene que tener 10 digitos</small>
-            <small ng-message="minlength">Tiene que tener 10 digitos</small>
+            <input type="text" name="cedula" ng-model="persona.cedula" ng-pattern="/[0-9]$/"
+                    ng-maxlength="10"
+                    ng-minlength="10"
+                    ng-required="true">
+            <div ng-messages="formPersona.cedula.$error">
+                <small ng-message="required" ng-if="!formPersona.nombre.$pristine">Este campo es obligatorio</small>
+                <small ng-message="pattern">Solo admite numeros</small>
+                <small ng-message="maxlength">Tiene que tener 10 digitos</small>
+                <small ng-message="minlength">Tiene que tener 10 digitos</small>
+            </div>
         </div>
         <button ng-click="guardar()" ng-disabled="!formPersona.$valid">Submit</button>
     </form>
-
-    <div>
-        <div ng-repeat="p in listaPersonas">
+</div>
+    <div class="col-md-8">
+        <div ng-repeat="p in listaPersonas" class="panel">
             <p>[[p.nombres]]</p>
             <p>[[p.apellidos]]</p>
             <p>[[p.cedula]]</p>
         </div>
     </div>
 </div>
+
 </body>
 </html>
